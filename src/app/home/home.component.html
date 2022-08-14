@@ -1,0 +1,11 @@
+<h1>Smart Home Sensor Network</h1>
+<hr />
+<div *ngFor="let result of apiResult" class="sensor-info">
+    <h1 class="sensor-location">{{result.sensorName}}:</h1>
+    <h2>Temperature: {{result.temp}}&#8457;</h2>
+    <h2>Humidity: {{result.humid}}%</h2>
+    <h2>Updated {{result.lastUpdatedDisplay}}</h2>
+    <a [routerLink]="['/chart']" target="_blank" [queryParams]="{sensor: result.location}">
+        {{result.sensorName}} Chart
+    </a>
+</div>
