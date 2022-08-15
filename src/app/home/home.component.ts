@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
   buildList(sensorData: any[]) {
     this.apiResult = [];
     var basement = new Room();
-    console.log(sensorData['basementData']['temp']);
 
     basement.sensorName = "Basement Sensor"
     basement.temp = sensorData['basementData']['temp'];
@@ -44,8 +43,6 @@ export class HomeComponent implements OnInit {
     this.apiResult.push(basement);
 
     var bedroom = new Room();
-    console.log(sensorData['bedroomData']['temp']);
-
     bedroom.sensorName = "Bedroom Sensor"
     bedroom.temp = sensorData['bedroomData']['temp'];
     bedroom.humid = sensorData['bedroomData']['humid'];
@@ -54,7 +51,6 @@ export class HomeComponent implements OnInit {
     bedroom.location = "bedroom";
 
     this.apiResult.push(bedroom);
-    console.log(this.apiResult.length);
   }
 
   refreshData() {

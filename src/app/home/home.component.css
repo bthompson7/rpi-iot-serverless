@@ -1,4 +1,4 @@
 .sensor-info{
-    margin: 0 auto;
-    display: table;
+    margin: 10px;
+    display: inline-table;
 }
