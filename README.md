@@ -1,6 +1,17 @@
+
+
+
 # PiAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+
+## Hardware Used:
+- 2 x Raspberry Pi 3B+
+- 2 x DHT22 Sensors
+
+## How it works:
+- Two Raspberry Pi's read DHT22 sensors every 10 minutes and then send the data via MQTT to AWS IoT. This triggers two Lambda functions to run and each function reads the data from AWS IoT and then inserts the data into a MySQL RDS instance.
+- The APIs the site uses were created using API Gateway and Lambda
 
 ## Development server
 
