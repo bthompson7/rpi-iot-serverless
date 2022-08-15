@@ -1,9 +1,13 @@
-<!-- temp -->
 <div class="charts">
-    <canvas baseChart [type]="lineChartType" [datasets]="tempData" [labels]="dataLabels">
+    <h2>{{pageTitle}} Sensor Chart</h2>
+    <div *ngIf="show" class="alert alert-danger" role="alert">
+        Invalid Sensor Name!
+    </div>
+    <!-- temp -->
+    <canvas baseChart [type]="chartType" [datasets]="tempData" [labels]="dataLabels">
     </canvas>
 
     <!-- humidity-->
-    <canvas baseChart [type]="lineChartType" [datasets]="humidData" [labels]="dataLabels">
+    <canvas baseChart [type]="chartType" [datasets]="humidData" [labels]="dataLabels">
     </canvas>
 </div>

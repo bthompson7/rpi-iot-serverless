@@ -8,6 +8,7 @@ import { ChartComponent } from './chart/chart.component';
 import { BackendService } from './service/backend.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgChartsModule } from 'ng2-charts';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgChartsModule
+    NgChartsModule,
+    NgbModule
   ],
   providers: [BackendService],
   bootstrap: [AppComponent]

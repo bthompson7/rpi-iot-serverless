@@ -5,7 +5,7 @@
     <h2>Temperature: {{result.temp}}&#8457;</h2>
     <h2>Humidity: {{result.humid}}%</h2>
     <h2>Updated {{result.lastUpdatedDisplay}}</h2>
-    <a [routerLink]="['/chart']" target="_blank" [queryParams]="{sensor: result.location}">
+    <a class="btn btn-primary" [routerLink]="['/chart']" target="_blank" [queryParams]="{sensor: result.location}">
         {{result.sensorName}} Chart
     </a>
 </div>
