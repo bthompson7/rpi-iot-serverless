@@ -9,8 +9,8 @@ import { catchError, retry, map } from 'rxjs/operators'
 export class BackendService {
 
   // TODO: replace with prod APIs
-  private sensorDataUrl = 'https://xagbd0vv15.execute-api.us-east-1.amazonaws.com/api-test';
-  private sensorChartDataUrl = 'https://sck4455qcb.execute-api.us-east-1.amazonaws.com/chart-api-test';
+  private sensorDataUrl = 'https://api.homesensor.info/live-data';
+  private sensorChartDataUrl = 'https://api.homesensor.info/chart-data';
   constructor(private http: HttpClient) {
 
   }
