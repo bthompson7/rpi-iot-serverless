@@ -36,6 +36,8 @@ func Handler(request events.APIGatewayProxyRequest) (map[string][]SensorData, er
 	if err != nil {
 	   log.Fatal(err)
 	}
+	
+	defer db.Close()
 	log.Printf("Processing Lambda request %s\n", request.RequestContext.RequestID)
 
 	firstRow, err := db.Query("select id, temp, humd, date  from(select * from tempdata2 order by id desc limit 60)Var1 order by id asc")
@@ -56,6 +58,7 @@ func Handler(request events.APIGatewayProxyRequest) (map[string][]SensorData, er
 		bedroomChartData = append(bedroomChartData, SensorData{Id:id, Temp:temp,Humid:humid, NormalTime:normalTime})
 	}
 
+	db.Close()
 	return map[string][]SensorData{"basementData": basementChartData, "bedroomData": bedroomChartData},nil
 }
 

@@ -27,13 +27,15 @@ var (
 
 func Handler(request events.APIGatewayProxyRequest) (map[string]SensorData, error) {
 	sensorDataList = nil
+
 	db, err := sql.Open("mysql",
 	"admin:pass(localhost:3306)/sensor_data")
 	if err != nil {
 	   log.Fatal(err)
 	}
+	
+	defer db.Close()
 	log.Printf("Processing Lambda request %s\n", request.RequestContext.RequestID)
-	log.Println(db)
 
 	firstRow, err := db.Query("select temp,humd,UNIX_TIMESTAMP(date) * 1000 as 'unixTime' ,convert_tz(date,'+00:00','-05:00') as 'normalTime' from tempdata2 order by id desc limit 1")
 	for firstRow.Next() {
