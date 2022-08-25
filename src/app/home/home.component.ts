@@ -36,18 +36,17 @@ export class HomeComponent implements OnInit {
     var basement = new Room();
 
     basement.sensorName = "Basement Sensor"
-    basement.temp = sensorData['basementData']['temp'];
-    basement.humid = sensorData['basementData']['humid'];
-    basement.lastUpdated = sensorData['basementData']['last_updated']
+    basement.temp = parseInt(sensorData['basementData']['temp']);
+    basement.humid = parseInt(sensorData['basementData']['humid']);
+    basement.lastUpdated = sensorData['basementData']['unixTime']
     basement.location = "basement";
     this.apiResult.push(basement);
 
     var bedroom = new Room();
     bedroom.sensorName = "Bedroom Sensor"
-    bedroom.temp = sensorData['bedroomData']['temp'];
-    bedroom.humid = sensorData['bedroomData']['humid'];
-    bedroom.lastUpdated = sensorData['bedroomData']['last_updated'];
-    bedroom.lastUpdatedDisplay = this.timeSince(sensorData['bedroomData']['last_updated']);
+    bedroom.temp = parseInt(sensorData['bedroomData']['temp']);
+    bedroom.humid = parseInt(sensorData['bedroomData']['humid']);
+    bedroom.lastUpdated = sensorData['bedroomData']['unixTime'];
     bedroom.location = "bedroom";
 
     this.apiResult.push(bedroom);
@@ -95,7 +94,6 @@ export class HomeComponent implements OnInit {
       intervalType += 's ago';
     } else if (this.interval == 1) {
       intervalType += ' ago';
-
     }
 
     return this.interval + ' ' + intervalType;

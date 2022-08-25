@@ -44,7 +44,6 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       const sensorLocation = params['sensor'];
-      console.log(sensorLocation);
       this.sensorLocation = sensorLocation;
     });
 
@@ -54,21 +53,19 @@ export class ChartComponent implements OnInit {
   buildList(sensorData: any[]) {
     if (this.sensorLocation === "basement") {
       this.pageTitle = "Basement";
-      for (let i = 0; i < sensorData['data']['basementChartData'].length; i++) {
-        let obj = sensorData['data']['basementChartData'][i];
-
-        this.tempDataList.push(obj.temp);
-        this.humidDataList.push(obj.humd);
-        this.chartDataLabels.push(obj.date);
+      for (let i = 0; i < sensorData['basementData'].length; i++) {
+        let obj = sensorData['basementData'][i];
+        this.tempDataList.push(parseInt(obj.temp));
+        this.humidDataList.push(parseInt(obj.humid));
+        this.chartDataLabels.push(obj.normalTime);
       }
     } else if (this.sensorLocation === "bedroom") {
       this.pageTitle = "Bedroom";
-      for (let i = 0; i < sensorData['data']['bedroomChartData'].length; i++) {
-        let obj = sensorData['data']['bedroomChartData'][i];
-
-        this.tempDataList.push(obj.temp);
-        this.humidDataList.push(obj.humd);
-        this.chartDataLabels.push(obj.date);
+      for (let i = 0; i < sensorData['bedroomData'].length; i++) {
+        let obj = sensorData['bedroomData'][i];
+        this.tempDataList.push(parseInt(obj.temp));
+        this.humidDataList.push(parseInt(obj.humid));
+        this.chartDataLabels.push(obj.normalTime);
       }
     } else {
       this.show = true;
