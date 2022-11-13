@@ -16,7 +16,10 @@ export class ChartComponent implements OnInit {
   tempDataList: any[] = []
   humidDataList: any[] = []
   chartDataLabels: any[] = []
-  show = false;
+  invalidSensorError = false;
+  validRoutes: string[] = ['basement', 'bedroom'];
+  dataLabels: any[] = this.chartDataLabels;
+  public chartType: ChartType = "line";
 
   // temp data
   tempData: any[] = [
@@ -34,9 +37,6 @@ export class ChartComponent implements OnInit {
     }
   ];
 
-  dataLabels: any[] = this.chartDataLabels;
-  public chartType: ChartType = "line";
-
   constructor(private backendService: BackendService, private activatedRoute: ActivatedRoute) {
 
   }
@@ -47,7 +47,12 @@ export class ChartComponent implements OnInit {
       this.sensorLocation = sensorLocation;
     });
 
-    this.backendService.getSensorChartData().subscribe(sensorData => this.buildList(sensorData))
+    if (this.validRoutes.includes(this.sensorLocation)) {
+      this.backendService.getSensorChartData().subscribe(sensorData => this.buildList(sensorData))
+    } else {
+      this.invalidSensorError = true;
+    }
+
   }
 
   buildList(sensorData: any[]) {
@@ -67,8 +72,6 @@ export class ChartComponent implements OnInit {
         this.humidDataList.push(parseInt(obj.humid));
         this.chartDataLabels.push(obj.normalTime);
       }
-    } else {
-      this.show = true;
     }
 
     // update each chart with the api data
