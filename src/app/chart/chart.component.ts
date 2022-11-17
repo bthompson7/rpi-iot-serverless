@@ -19,7 +19,7 @@ export class ChartComponent implements OnInit {
   invalidSensorError = false;
   validRoutes: string[] = ['basement', 'bedroom'];
   dataLabels: any[] = this.chartDataLabels;
-  public chartType: ChartType = "line";
+  chartType: ChartType = "line";
 
   // temp data
   tempData: any[] = [
