@@ -40,7 +40,7 @@ func Handler(request events.APIGatewayProxyRequest) (map[string][]SensorData, er
 	defer db.Close()
 	log.Printf("Processing Lambda request %s\n", request.RequestContext.RequestID)
 
-	firstRow, err := db.Query("select id, temp, humd, date  from(select * from tempdata2 order by id desc limit 60)Var1 order by id asc")
+	firstRow, err := db.Query("select id, temp, humd, date  from(select id, temp, humd, date from tempdata2 order by id desc limit 60)Var1 order by id asc")
 	for firstRow.Next() {
 		err := firstRow.Scan(&id, &temp, &humid, &normalTime)
 		if err != nil {
@@ -49,7 +49,7 @@ func Handler(request events.APIGatewayProxyRequest) (map[string][]SensorData, er
 		basementChartData = append(basementChartData, SensorData{Id:id, Temp:temp,Humid:humid, NormalTime:normalTime})
 	}
 
-	secondRow, err := db.Query("select id, temp, humd, date  from(select * from tempdata3 order by id desc limit 60)Var1 order by id asc")
+	secondRow, err := db.Query("select id, temp, humd, date  from(select id, temp, humd, date from tempdata3 order by id desc limit 60)Var1 order by id asc")
 	for secondRow.Next() {
 		err := secondRow.Scan(&id, &temp, &humid, &normalTime)
 		if err != nil {

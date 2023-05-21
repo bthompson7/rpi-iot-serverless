@@ -37,7 +37,7 @@ func Handler(request events.APIGatewayProxyRequest) (map[string]SensorData, erro
 	defer db.Close()
 	log.Printf("Processing Lambda request %s\n", request.RequestContext.RequestID)
 
-	firstRow, err := db.Query("select temp,humd,UNIX_TIMESTAMP(date) * 1000 as 'unixTime' ,convert_tz(date,'+00:00','-05:00') as 'normalTime' from tempdata2 order by id desc limit 1")
+	firstRow, err := db.Query("SELECT temp, humd, UNIX_TIMESTAMP(date) * 1000 AS 'unixTime', convert_tz(date, '+00:00', '-05:00') AS 'normalTime' FROM tempdata2 WHERE id = (SELECT MAX(id) FROM tempdata2)")
 	for firstRow.Next() {
 		err := firstRow.Scan(&temp, &humid, &unixTime, &normalTime)
 		if err != nil {
@@ -48,7 +48,7 @@ func Handler(request events.APIGatewayProxyRequest) (map[string]SensorData, erro
 
 	}
 
-	secondRow, err := db.Query("select temp,humd,UNIX_TIMESTAMP(date) * 1000 as 'unixTime' ,convert_tz(date,'+00:00','-05:00') as 'normalTime' from tempdata3 order by id desc limit 1")
+	secondRow, err := db.Query("SELECT temp, humd, UNIX_TIMESTAMP(date) * 1000 AS 'unixTime', convert_tz(date, '+00:00', '-05:00') AS 'normalTime' FROM tempdata3 WHERE id = (SELECT MAX(id) FROM tempdata3)")
 	for secondRow.Next() {
 		err := secondRow.Scan(&temp, &humid, &unixTime, &normalTime)
 		if err != nil {
