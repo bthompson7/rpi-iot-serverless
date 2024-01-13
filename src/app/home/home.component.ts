@@ -67,10 +67,6 @@ export class HomeComponent implements OnInit {
     var seconds = Math.floor((now - date) / 1000);
     var intervalType;
 
-    this.interval = Math.floor(seconds / 2592000);
-    if (this.interval >= 1) {
-      intervalType = 'month';
-    } else {
       this.interval = Math.floor(seconds / 86400);
       if (this.interval >= 1) {
         intervalType = 'day';
@@ -87,7 +83,6 @@ export class HomeComponent implements OnInit {
             intervalType = "second";
           }
         }
-      }
     }
 
     if (this.interval > 1 || this.interval === 0) {
